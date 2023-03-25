@@ -1,0 +1,12 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "s3bucketcreateincf",
+    "Resources": {
+        "mycfs3bucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+                "BucketName": "cfs325032023"
+            }
+        }
+    }
+}
