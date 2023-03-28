@@ -5,7 +5,7 @@ resource "aws_vpc" "basic" {
   }
 }
 resource "aws_subnet" "subnets" {
-  count             = 4 # length(var.basic-subnet-cidrs)
+  count             = 6 # length(var.basic-subnet-cidrs)
   vpc_id            = aws_vpc.basic.id
   cidr_block        = var.basic-subnet-cidrs[count.index]
   availability_zone = "${var.region}${var.basic-subnet-azs[count.index]}"
