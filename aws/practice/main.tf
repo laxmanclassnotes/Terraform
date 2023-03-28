@@ -4,15 +4,16 @@ resource "aws_vpc" "basic" {
     Name = "basic"
   }
 }
+
 resource "aws_subnet" "subnets" {
-  count             = 6 # length(var.basic-subnet-cidrs)
+  count             = length(var.basic-subnet-names)
   vpc_id            = aws_vpc.basic.id
-  cidr_block        = var.basic-subnet-cidrs[count.index]
+  cidr_block        = cidrsubnet(var.basic-cidr-range, 8, count.index)
   availability_zone = "${var.region}${var.basic-subnet-azs[count.index]}"
   depends_on = [
     aws_vpc.basic
   ]
   tags = {
-    Name = var.basic-subnet-Names[count.index]
+    Name = var.basic-subnet-names[count.index]
   }
 }
