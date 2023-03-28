@@ -8,7 +8,7 @@ resource "aws_db_instance" "default" {
   db_name             = "mydb"
   engine              = "mysql"
   engine_version      = "5.7"
-  instance_class      = "db.t3.micro"
+  instance_class      = "db.t2.micro"
   username            = "laxmandb"
   password            = random_password.password.result
   skip_final_snapshot = true
