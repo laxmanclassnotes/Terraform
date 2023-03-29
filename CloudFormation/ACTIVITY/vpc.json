@@ -34,7 +34,47 @@
         "az2": {
             "Description": "This is az2",
             "Type": "AWS::EC2::AvailabilityZone::Name"
+        },
+        "engine": {
+            "Description": "database engine type",
+            "Type": "String",
+            "Default": "mysql",
+            "AllowedValues": [
+                "mysql",
+                "postgres"
+            ]
+        },
+        "portno": {
+            "Description": "to change ports",
+            "Type": "String",
+            "Default": "3306",
+            "AllowedValues": [
+                "3306",
+                "8080"
+            ]
+        },
+        
+        "Dbclass": {
+            "Description": "to the otherclasses",
+            "Type": "String",
+            "Default": "db.t3.micro",
+            "AllowedValues":["db.t3.micro","db.m3.large","db.t3.medium"]
+        },
+        
+        "dbname": {
+            "Description": "to the prefered names",
+            "Type": "String",
+            "Default": "employees",
+            "AllowedValues":["employees","laxamnadb"]
+        },
+        
+        "storagedb": {
+            "Description": "to the stroge",
+            "Type": "String",
+            "Default": "gp2",
+            "AllowedValues":["gp2","gp3"]
         }
+              
     },
     "Resources": {
         "ntiervpc": {
@@ -168,6 +208,109 @@
                     {
                         "Key": "CreatedBy",
                         "Value": "Cloudformation"
+                    }
+                ]
+            }
+        },
+        "rdsDBSubnetGroup": {
+            "Type": "AWS::RDS::DBSubnetGroup",
+            "Properties": {
+                "DBSubnetGroupDescription": "ntierdbsubnetgroup",
+                "DBSubnetGroupName": "ntierdbsubnetgroup",
+                "SubnetIds": [
+                    {
+                        "Ref": "db1subnet"
+                    },
+                    {
+                        "Ref": "db2subnet"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Env",
+                        "Value": "Dev"
+                    },
+                    {
+                        "Key": "CreatedBy",
+                        "Value": "Cloudformation"
+                    }
+                ]
+            }
+        },
+        "ntierdbsg": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "ntierdb security group",
+                "SecurityGroupIngress": [
+                    {
+                        "CidrIp": {
+                            "Ref": "vpccidr"
+                        },
+                        "Description": "Allow all incoming connections on 3306",
+                        "IpProtocol": "tcp",
+                        "FromPort": 3306,
+                        "ToPort": 3306
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "ntiervpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Env",
+                        "Value": "Dev"
+                    },
+                    {
+                        "Key": "CreatedBy",
+                        "Value": "Cloudformation"
+                    }
+                ]
+            }
+        },
+        "ntierdb": {
+            "Type": "AWS::RDS::DBInstance",
+            "Properties": {
+                "AllocatedStorage": 20,
+                "DBInstanceClass": {
+                 "Ref": "Dbclass" 
+                 },
+                "AllowMajorVersionUpgrade": false,
+                "AutoMinorVersionUpgrade": false,
+                "BackupRetentionPeriod": 0,
+                "DBInstanceIdentifier": "qtrdsdbinstancefromcf",
+                "DBName": {
+                    "Ref": "dbname" 
+                },
+                "DBSubnetGroupName": {
+                    "Ref": "rdsDBSubnetGroup"
+                },
+                "Engine": {
+                    "Ref": "engine"
+                },
+                "EngineVersion": "8.0.32",
+                "MasterUsername": "admin",
+                "MasterUserPassword": "adminadmin",
+                "MultiAZ": false,
+                "Port": {
+                    "Ref": "portno"
+                },
+                "PubliclyAccessible": false,
+                "StorageType": {
+                     "Ref": "storagedb"
+                },
+                "Tags": [
+                    {
+                        "Key": "Env",
+                        "Value": "Dev"
+                    },
+                    {
+                        "Key": "CreatedBy",
+                        "Value": "Cloudformation"
+                    }
+                ],
+                "VPCSecurityGroups": [
+                    {
+                        "Ref": "ntierdbsg"
                     }
                 ]
             }
