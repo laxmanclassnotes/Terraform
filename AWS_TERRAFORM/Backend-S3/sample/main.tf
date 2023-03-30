@@ -3,5 +3,4 @@ resource "aws_vpc" "samplevpc" {
   tags = {
     Name = "samplevpc"
   }
-
 }
