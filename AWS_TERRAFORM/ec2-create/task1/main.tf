@@ -6,4 +6,7 @@ resource "aws_key_pair" "my_id_rsa" {
 resource "aws_instance" "myec2" {
   ami           = "ami-0fcf52bcf5db7b003"
   instance_type = "t3.micro"
+  tags = {
+    Name = "myec2"
+  }
 }
