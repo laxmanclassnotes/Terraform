@@ -11,7 +11,25 @@ resource "aws_instance" "myec2" {
   subnet_id                   = data.aws_subnet.first.id
   user_data                   = file("apache.sh")
   vpc_security_group_ids      = ["sg-0b2560f23aaba5e98"]
+  connection {
+    host        = self.public_ip
+    user        = "ubuntu"
+    private_key = file("~/.ssh/id_rsa")
+    type        = "ssh"
+
+  }
+  provisioner "file" {
+    source      = "apache.sh"
+    destination = "/tmp/apache.sh"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/apache.sh",
+      "/tmp/apache.sh args",
+    ]
+  }
   tags = {
     Name = "myec2"
   }
+
 }
