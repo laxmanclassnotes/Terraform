@@ -1,0 +1,81 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "vpccreateincf",
+    "keypair": {
+        "Description": "keypair",
+        "Type": "AWS::EC2::KeyPair::KeyName"
+    },
+    "instancetype": {
+        "Description": "instance type",
+        "Type": "String",
+        "Default": "t2.micro",
+        "AllowedValues": [
+            "t2.micro",
+            "t3.micro"
+        ]
+    },
+    "Mappings": {
+        "ubuntuMap": {
+            "us-west-2": {
+                "2004": "ami-0223246728818f162",
+                "2204": "ami-0fcf52bcf5db7b003"
+            }
+        }
+    },
+    "Resources": {
+        "webec2": {
+            "Type": "AWS::EC2::Instance",
+            "Condition": "createWebVM",
+            "Properties": {
+                "KeyName": {
+                    "Ref": "keypair"
+                },
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "ubuntuMap",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "2204"
+                    ]
+                },
+                "InstanceType": {
+                    "Ref": "instancetype"
+                },
+                "Monitoring": false,
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": true,
+                        "DeviceIndex": "0"
+                    }
+                ],
+                "UserData": {
+                    "Fn::Base64": {
+                        "Fn::Join": [
+                            "\n",
+                            [
+                                "#!/bin/bash",
+                                "sudo apt update",
+                                "sudo apt install ngnix -y"
+                            ]
+                        ]
+                    }
+                },
+                "Tags": [
+                    {
+                        "Key": "Env",
+                        "Value": "Dev"
+                    },
+                    {
+                        "Key": "CreatedBy",
+                        "Value": "Cloudformation"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "myec2"
+                    }
+                ]
+            }
+        }
+    }
+}
