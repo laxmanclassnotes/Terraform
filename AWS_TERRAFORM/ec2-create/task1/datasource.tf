@@ -7,3 +7,8 @@ data "aws_subnet" "first" {
   availability_zone = "${var.region}a"
 
 }
+data "aws_subnet" "second" {
+  vpc_id            = data.aws_vpc.default.id
+  availability_zone = "${var.region}b"
+
+}
