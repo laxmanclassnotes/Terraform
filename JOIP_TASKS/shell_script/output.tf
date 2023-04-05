@@ -1,0 +1,3 @@
+output "echo" {
+  value = "HelloWorld"
+}
