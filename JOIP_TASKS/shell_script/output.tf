@@ -1,3 +1,3 @@
-output "echo" {
-  value = "HelloWorld"
+output "local" {
+  value = "hello World"
 }
