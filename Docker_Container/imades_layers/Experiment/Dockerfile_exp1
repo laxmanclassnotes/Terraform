@@ -1,0 +1,8 @@
+FROM alpine
+LABEL author=laxman
+CMD [ "sleep", "1d" ]
+
+# in command_line  "docker image build -t exp1 -f exp1 ."
+# in above -f is used the purpose of we can't create Dockerfile we create exp1 file
+# so we used the above command
+# To see the changes in layers we use "docker image inspect exp1"

@@ -1,0 +1,12 @@
+FROM alpine
+LABEL author=laxman    
+ADD 1.txt /
+CMD [ "sleep", "1d" ]
+
+#before ADD step used follow this line in terminl we write "(echo "hello World ">1.txt)"
+
+
+# In above -f is used the purpose of we can't create Dockerfile we create exp2 file
+# so we used the command
+#  "docker image build -t exp2 -f exp2 ." these command used
+# To see the changes in layers we use "docker image inspect exp2"

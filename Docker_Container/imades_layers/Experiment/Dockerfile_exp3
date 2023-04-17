@@ -1,0 +1,11 @@
+FROM alpine
+LABEL author=laxman    
+RUN echo "One" > 1.txt 
+RUN echo "Two" > 2.txt
+RUN echo "Three" > 3.txt
+CMD [ "sleep", "1d" ]
+
+# In above -f is used the purpose of we can't create Dockerfile we create exp3 file
+# so we used the command
+#  "docker image build -t exp3 -f exp3 ." these command used
+# To see the changes in layers we use "docker image inspect exp3"
