@@ -6,4 +6,5 @@ ADD https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/gameoflife.war
 EXPOSE 8080
 
 # docker image build -t gol .
-#  docker container run -d -p 35000:8080 --name laxman gol
+# docker container run -d -P --name gole1 gol
+#  docker container run -d -p 35000:8080 --name laxman gol(optional)
