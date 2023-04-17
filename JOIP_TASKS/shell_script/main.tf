@@ -4,10 +4,12 @@ resource "aws_instance" "mytfec2" {
   instance_type               = "t3.micro"
   associate_public_ip_address = true
   vpc_security_group_ids      = ["sg-0fd35704549e9148f"]
-  provisioner "local-exec" {
-    command = "echo HelloWorld"
-  }
   tags = {
     Name = "HelloWorld"
+  }
+}
+resource "null_resource" "example" {
+  provisioner "local-exec" {
+    command = "sh myscript.sh"
   }
 }

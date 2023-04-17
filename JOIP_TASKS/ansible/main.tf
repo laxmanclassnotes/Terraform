@@ -7,5 +7,19 @@ resource "aws_instance" "mytfec2" {
   lifecycle {
     create_before_destroy = true
   }
-  user_data = file("ansible.sh")
+  #user_data = file("ansible.sh")
+}
+resource "null_resource" "ansible_install" {
+  provisioner "remote-exec" {
+    inline = [
+      "curl -sSfL https://example.com/install-ansible.sh | bash -",
+    ]
+  }
+
+  connection {
+    type        = "ssh"
+    host        = "ubuntu.example.com"
+    user        = "ubuntu"
+    private_key = file("~/.ssh/id_rsa")
+  }
 }
