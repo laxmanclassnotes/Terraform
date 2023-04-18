@@ -1,0 +1,13 @@
+{
+  "Id": "Policy1681792818661",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1681792812421",
+      "Action": "s3:*",
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::narayana-s3-bucket",
+      "Principal": "*"
+    }
+  ]
+}
