@@ -1,7 +1,7 @@
 FROM mysql
 
 
-# docker container run -d --name mysqldb -e MYSQL_ROOT_PASSWORD=rootroot -e MYSQL_DATABASE=employees -e MYSQL_USER=laxman -e MYSQL_PASSWORD=rootroot mysql:8
+# 
 # docker container exec -it mysqldb mysql --password=rootroot
 
 # mysql> use employees;
