@@ -17,7 +17,7 @@ FROM  myvoldb
 
 # -----------------------------------------------------------------------------------
 
-#  docker container run -d --name mysqldb -v myvol:/var/lib/mysql -P -e MYSQL_ROOT_PASSWORD=rootroot -e MYSQL_DATABASE=employees -e MYSQL_USER=laxman -e MYSQL_PASSWORD=rootroot mysql:8 -P -e MYSQL_ROOT_PASSWORD=rootroot -e MYSQL_DATABASE=employees -e MYSQL_USER=laxman -e MYSQL_PASSWORD=rootroot mysql:8
+#  docker container run -d --name mysqldb -v myvol:/var/lib/mysql -P -e MYSQL_ROOT_PASSWORD=rootroot -e MYSQL_DATABASE=employees -e MYSQL_USER=laxman -e MYSQL_PASSWORD=rootroot mysql:8
 
 # docker container exec -it mysqldb mysql --password=rootroot
 
