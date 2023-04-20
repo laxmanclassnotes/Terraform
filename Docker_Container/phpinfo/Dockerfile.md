@@ -21,3 +21,6 @@ CMD ["apache2ctl","-D", "FOREGROUND"]
 * Then in this server url we add /info.php
 ![Preview](./Images/php6.png)
 
+
+
+
