@@ -1,0 +1,28 @@
+---
+version: "3.9"
+services: 
+  springpet :
+    build :
+      context: .
+      dockerfile: Dockerfile
+    image: spc:3.0.0
+
+  springboot:
+    image: spc:3.0.0
+    container_name: springboot
+    networks:
+      - spring-net
+    volumes:
+      - spring-db:/var/lib/mysql
+    ports:
+      - "8080:8080"  
+volumes:
+   spring-db:  
+networks:
+   spring-net:      
+
+
+# docker compose up -d            
+          
+  
+   

@@ -10,7 +10,7 @@ RUN cd /spring-petclinic && mvn package
 
 
 FROM amazoncorretto:17-alpine-jdk
-LABEL author="khaja"
+LABEL author="Laxman"
 EXPOSE 8080
 ARG HOME_DIR=/spc
 WORKDIR ${HOME_DIR}
